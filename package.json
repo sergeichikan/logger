@@ -1,0 +1,17 @@
+{
+  "name": "@sergeichikan/logger",
+  "version": "1.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "dec/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "github:sergeichikan/logger",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.9.0"
+  }
+}
