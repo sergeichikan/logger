@@ -1,1 +1,1 @@
-export declare const transport: (message: Record<string | number | symbol, unknown>) => unknown;
+export declare const transport: (msg: Record<string | number | symbol, unknown>) => unknown;

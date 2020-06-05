@@ -1,9 +1,8 @@
 import { log } from "./log";
-import { Mixin } from "./mixin";
 
-export const trace = (mixin1: Mixin, mixin2?: Mixin) => log(1, mixin1, mixin2);
-export const debug = (mixin1: Mixin, mixin2?: Mixin) => log(2, mixin1, mixin2);
-export const info = (mixin1: Mixin, mixin2?: Mixin) => log(3, mixin1, mixin2);
-export const warn = (mixin1: Mixin, mixin2?: Mixin) => log(4, mixin1, mixin2);
-export const error = (mixin1: Mixin, mixin2?: Mixin) => log(5, mixin1, mixin2);
-export const fatal = (mixin1: Mixin, mixin2?: Mixin) => log(6, mixin1, mixin2);
+export const trace = (msg: unknown) => log(1, msg);
+export const debug = (msg: unknown) => log(2, msg);
+export const info = (msg: unknown) => log(3, msg);
+export const warn = (msg: unknown) => log(4, msg);
+export const error = (msg: unknown) => log(5, msg);
+export const fatal = (msg: unknown) => log(6, msg);

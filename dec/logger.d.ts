@@ -1,11 +1,13 @@
-import { Mixin } from "./mixin";
+export declare type Form = (lvl: number, msg: unknown) => Record<PropertyKey, unknown>;
+export declare type Transport = (msg: Record<PropertyKey, unknown>) => unknown;
 export declare class Logger {
-    private readonly mixin1;
-    constructor(mixin1: Mixin);
-    trace(mixin2: Mixin): unknown;
-    debug(mixin2: Mixin): unknown;
-    info(mixin2: Mixin): unknown;
-    warn(mixin2: Mixin): unknown;
-    error(mixin2: Mixin): unknown;
-    fatal(mixin2: Mixin): unknown;
+    readonly form: Form;
+    readonly transport: Transport;
+    constructor(form?: Form, transport?: Transport);
+    trace(msg: unknown): unknown;
+    debug(msg: unknown): unknown;
+    info(msg: unknown): unknown;
+    warn(msg: unknown): unknown;
+    error(msg: unknown): unknown;
+    fatal(msg: unknown): unknown;
 }

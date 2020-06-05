@@ -1,35 +1,43 @@
-import { debug, error, fatal, info, trace, warn } from "./logs";
-import { Mixin } from "./mixin";
+import { transport as defaultTransport } from "./transport";
+import { form as defaultFrom } from "./form";
+
+export type Form = (lvl: number, msg: unknown) => Record<PropertyKey, unknown>;
+export type Transport = (msg: Record<PropertyKey, unknown>) => unknown;
 
 export class Logger {
 
-    private readonly mixin1: Mixin;
+    public readonly form: Form;
+    public readonly transport: Transport;
 
-    constructor(mixin1: Mixin) {
-        this.mixin1 = mixin1;
+    constructor(
+        form: Form = defaultFrom,
+        transport: Transport = defaultTransport,
+    ) {
+        this.form = form;
+        this.transport = transport;
     }
 
-    public trace(mixin2: Mixin) {
-        return trace(this.mixin1, mixin2);
+    public trace(msg: unknown) {
+        return this.transport(this.form(1, msg));
     }
 
-    public debug(mixin2: Mixin) {
-        return debug(this.mixin1, mixin2);
+    public debug(msg: unknown) {
+        return this.transport(this.form(2, msg));
     }
 
-    public info(mixin2: Mixin) {
-        return info(this.mixin1, mixin2);
+    public info(msg: unknown) {
+        return this.transport(this.form(3, msg));
     }
 
-    public warn(mixin2: Mixin) {
-        return warn(this.mixin1, mixin2);
+    public warn(msg: unknown) {
+        return this.transport(this.form(4, msg));
     }
 
-    public error(mixin2: Mixin) {
-        return error(this.mixin1, mixin2);
+    public error(msg: unknown) {
+        return this.transport(this.form(5, msg));
     }
 
-    public fatal(mixin2: Mixin) {
-        return fatal(this.mixin1, mixin2);
+    public fatal(msg: unknown) {
+        return this.transport(this.form(6, msg));
     }
 }

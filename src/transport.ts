@@ -1,3 +1,3 @@
-export const transport = (
-    message: Record<PropertyKey, unknown>,
-): unknown => process.stdout.write(JSON.stringify(message) + "\n");
+export const transport = (msg: Record<PropertyKey, unknown>): unknown => {
+    return process.stdout.write(JSON.stringify(msg) + "\n");
+};

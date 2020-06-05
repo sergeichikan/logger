@@ -1,13 +1,6 @@
 import { transport } from "./transport";
-import { Mixin } from "./mixin";
+import { form } from "./form";
 
-export const log = (
-    level: number,
-    mixin1?: Mixin,
-    mixin2?: Mixin,
-): unknown => transport({
-    lvl: level,
-    t: Date.now(),
-    ...mixin1,
-    ...mixin2,
-});
+export const log = (lvl: number, msg: unknown) => {
+    return transport(form(lvl, msg));
+};
