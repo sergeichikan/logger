@@ -1,6 +1,6 @@
-import { transport } from "./transport";
-import { form } from "./form";
+import { defaultTransport } from "./default-transport";
+import { defaultForm } from "./default-form";
 
 export const log = (lvl: number, msg: unknown) => {
-    return transport(form(lvl, msg));
+    return defaultTransport(defaultForm(lvl, msg));
 };

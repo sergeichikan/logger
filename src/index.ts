@@ -1,12 +1,14 @@
-import { form } from "./form";
-import { transport } from "./transport";
+import { defaultForm } from "./default-form";
+import { defaultTransport } from "./default-transport";
+import { Form } from "./form";
+import { Transport } from "./transport";
 import { log } from "./log";
-import { Logger, Form, Transport } from "./logger";
+import { Logger } from "./logger";
 import { trace, debug, error, fatal, info, warn } from "./logs";
 
 export {
-    form,
-    transport,
+    defaultForm,
+    defaultTransport,
     log,
     Logger,
     Form,

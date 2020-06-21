@@ -1,43 +1,46 @@
-import { transport as defaultTransport } from "./transport";
-import { form as defaultFrom } from "./form";
+import { EventEmitter } from "events"
 
-export type Form = (lvl: number, msg: unknown) => Record<PropertyKey, unknown>;
-export type Transport = (msg: Record<PropertyKey, unknown>) => unknown;
+import { defaultTransport } from "./default-transport";
+import { defaultForm } from "./default-form";
+import { Form } from "./form";
+import { Transport } from "./transport";
 
-export class Logger {
-
-    public readonly form: Form;
-    public readonly transport: Transport;
-
-    constructor(
-        form: Form = defaultFrom,
+export class Logger extends EventEmitter {
+    public constructor(
+        form: Form = defaultForm,
         transport: Transport = defaultTransport,
     ) {
-        this.form = form;
-        this.transport = transport;
+        super();
+        this.on("transport", transport);
+        this.on("trace", (msg: unknown) => this.emit("transport", form(1, msg)));
+        this.on("debug", (msg: unknown) => this.emit("transport", form(2, msg)));
+        this.on("info", (msg: unknown) => this.emit("transport", form(3, msg)));
+        this.on("warn", (msg: unknown) => this.emit("transport", form(4, msg)));
+        this.on("error", (msg: unknown) => this.emit("transport", form(5, msg)));
+        this.on("fatal", (msg: unknown) => this.emit("transport", form(6, msg)));
     }
 
     public trace(msg: unknown) {
-        return this.transport(this.form(1, msg));
+        this.emit("trace", msg);
     }
 
     public debug(msg: unknown) {
-        return this.transport(this.form(2, msg));
+        this.emit("debug", msg);
     }
 
     public info(msg: unknown) {
-        return this.transport(this.form(3, msg));
+        this.emit("info", msg);
     }
 
     public warn(msg: unknown) {
-        return this.transport(this.form(4, msg));
+        this.emit("warn", msg);
     }
 
     public error(msg: unknown) {
-        return this.transport(this.form(5, msg));
+        this.emit("error", msg);
     }
 
     public fatal(msg: unknown) {
-        return this.transport(this.form(6, msg));
+        this.emit("fatal", msg);
     }
 }
